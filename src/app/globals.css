@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #0f071a;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(166, 117, 255, 0.35);
+  color: #fdfcf9;
+}
+
+/* Subtle custom scrollbar so the fairy-tale mood holds even here */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f071a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6e41c8, #a675ff);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.text-shadow-glow {
+  text-shadow: 0 0 18px rgba(255, 215, 107, 0.35);
+}
+
+/* Lanterns: continuous rise + gentle horizontal sway, reused per-lantern
+   with randomized duration/delay/amplitude set via inline styles. */
+@keyframes rise-lantern {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-135vh);
+  }
+}
+
+@keyframes lantern-sway {
+  0%,
+  100% {
+    margin-left: 0px;
+  }
+  50% {
+    margin-left: var(--sway, 14px);
+  }
+}
+
+@keyframes flame-flicker {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+.lantern-rise {
+  animation-name: rise-lantern;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.lantern-sway {
+  animation-name: lantern-sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.lantern-flame {
+  animation: flame-flicker 1.8s ease-in-out infinite;
+}
